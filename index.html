@@ -3,286 +3,211 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>سامانه استراتژیک معاوضه املاک تهران</title>
+    <title>سامانه هوشمند معاوضه املاک تهران</title>
     <style>
-        :root {
-            --primary: #0a192f; --secondary: #112240; --accent: #c6a700;
-            --text: #e6f1ff; --success: #64ffda; --danger: #ff4d4d;
-        }
-        body { font-family: 'Tahoma', sans-serif; background-color: var(--primary); color: var(--text); margin: 0; }
-        header { background: var(--secondary); padding: 30px; text-align: center; border-bottom: 3px solid var(--accent); cursor: pointer; }
-        .container { max-width: 1200px; margin: auto; padding: 20px; }
-        
-        .hero { background: var(--secondary); padding: 25px; border-radius: 15px; margin-bottom: 30px; border-right: 5px solid var(--accent); }
-        .hero h2 { color: var(--accent); margin-top: 0; }
-
-        /* Form & Cards */
-        .card { background: var(--secondary); padding: 25px; border-radius: 12px; margin-bottom: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        label { display: block; margin-bottom: 5px; color: var(--accent); font-size: 0.9rem; }
-        input, select, textarea { width: 100%; padding: 10px; background: var(--primary); border: 1px solid #233554; color: white; border-radius: 5px; box-sizing: border-box; }
-        .full-width { grid-column: span 2; }
-        
-        .btn { background: var(--accent); color: var(--primary); border: none; padding: 12px 25px; border-radius: 5px; cursor: pointer; font-weight: bold; width: 100%; }
-        .btn-outline { background: transparent; border: 1px solid var(--accent); color: var(--accent); margin-top: 10px; }
-        .btn-small { padding: 5px 10px; font-size: 0.8rem; width: auto; margin: 2px; }
-
-        /* Property Item */
-        .property-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 25px; }
-        .property-item { background: var(--secondary); border-radius: 12px; padding: 20px; border: 1px solid #233554; position: relative; }
-        .property-item h4 { color: var(--success); margin: 0 0 15px 0; border-bottom: 1px solid #233554; padding-bottom: 10px; }
-        .property-info { font-size: 0.85rem; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-        .info-field { color: #8892b0; }
-        .info-value { color: var(--text); font-weight: bold; }
-        .property-actions { margin-top: 20px; border-top: 1px solid #233554; padding-top: 15px; display: flex; flex-wrap: wrap; gap: 5px; }
-
-        /* Tabs/Sections */
-        .tabs { display: flex; gap: 10px; margin-bottom: 20px; }
-        .tab-btn { padding: 10px 20px; background: var(--secondary); border: none; color: white; cursor: pointer; border-radius: 5px; }
-        .tab-btn.active { background: var(--accent); color: var(--primary); }
-
-        /* Chat & Messages */
-        #chat-box { background: #020c1b; padding: 15px; border-radius: 10px; height: 200px; overflow-y: auto; margin-bottom: 10px; border: 1px solid var(--accent); }
-        
-        .badge-user { background: var(--success); color: var(--primary); padding: 2px 6px; border-radius: 4px; font-size: 0.7rem; }
+        :root{--p:#0a192f;--s:#b8860b;--a:#ffd700;--t:#e6f1ff;--bg:#f4f4f4;--w:#fff}body{font-family:Tahoma,sans-serif;background:var(--bg);margin:0;color:var(--p)}header{background:var(--p);color:var(--a);padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center;box-shadow:0 4px 10px rgba(0,0,0,.3);position:sticky;top:0;z-index:1000}nav button{background:0 0;border:1px solid var(--a);color:var(--a);padding:.5rem 1rem;cursor:pointer;margin-right:5px;border-radius:4px;transition:.3s}nav button:hover{background:var(--a);color:var(--p)}.hero{background:linear-gradient(rgba(10,25,47,.8),rgba(10,25,47,.8)),url(https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80);background-size:cover;height:300px;display:flex;flex-direction:column;justify-content:center;align-items:center;color:var(--w);text-align:center}.hero h1{color:var(--a);font-size:2.5rem;margin:0}.container{padding:2rem;max-width:1200px;margin:auto}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:25px}.card{background:var(--w);border-radius:12px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.08);transition:transform .3s;border-top:4px solid var(--s)}.card:hover{transform:translateY(-10px)}.card-img{height:200px;background:#ddd;background-size:cover;background-position:center}.card-body{padding:1.5rem}.card-title{font-weight:700;font-size:1.2rem;margin-bottom:10px;color:var(--p)}.card-info{font-size:.9rem;color:#666;line-height:1.6}.badge{background:var(--s);color:#fff;padding:2px 8px;border-radius:4px;font-size:.75rem}.modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.7);z-index:2000;justify-content:center;align-items:center}.modal-content{background:#fff;width:90%;max-width:700px;max-height:80vh;overflow-y:auto;padding:2rem;border-radius:12px;position:relative}.close-modal{position:absolute;top:15px;left:15px;font-size:1.5rem;cursor:pointer}.btn-main{background:var(--p);color:var(--a);border:none;padding:12px 25px;border-radius:6px;cursor:pointer;font-weight:700;width:100%}.panel{display:none}.panel.active{display:block}footer{background:var(--p);color:var(--w);text-align:center;padding:2rem;margin-top:3rem}.spec-table{width:100%;border-collapse:collapse;margin-top:15px}.spec-table td{padding:8px;border-bottom:1px solid #eee;font-size:.9rem}.spec-label{font-weight:700;color:var(--s);width:40%}
     </style>
 </head>
 <body>
-
-<header onclick="adminLogin()">
-    <h1>سامانه هوشمند مدیریت و معاوضه املاک</h1>
-    <p>پلتفرم تخصصی تحلیل دارایی و تبادل استراتژیک</p>
+<header>
+    <div class="logo">🏛️ سامانه هوشمند معاوضه</div>
+    <nav>
+        <button onclick="_0x4f1a('home')">خانه</button>
+        <button onclick="_0x4f1a('search')">جستجو</button>
+        <button onclick="_0x4f1a('favorites')">علاقه‌مندی‌ها</button>
+        <button onclick="_0x4f1a('register')">ثبت ملک</button>
+        <button onclick="_0x4f1a('upgrade')">ارتقا حساب</button>
+        <button onclick="_0x4f1a('admin')">پنل مدیریت</button>
+    </nav>
 </header>
-
-<div class="container">
-    
+<div id="home-panel" class="panel active">
     <div class="hero">
-        <h2>تحلیل مقایسه‌ای و فرصت‌های طلایی</h2>
-        <p>
-            در این سامانه، شما با ثبت دقیق مشخصات ملک خود، وارد دیتابیسی می‌شوید که بیش از <b>۱۰۰ دارایی فعال</b> را در اختیار دارد. 
-            هدف ما این است که با مقایسه فیلد به فیلدِ ملک شما با سایرین، به شما نشان دهیم چطور می‌توانید با یک معاوضه هوشمند، ارزش دارایی خود را چندین برابر کنید.
-        </p>
+        <h1>معاوضه هوشمند، بدون نیاز به نقدینگی</h1>
+        <p>اولین سامانه تخصصی معاوضه ملک با ملک در تهران</p>
     </div>
-
-    <div class="tabs">
-        <button class="tab-btn active" onclick="showSection('market')">بازار فعال</button>
-        <button class="tab-btn" onclick="showSection('my-assets')">املاک من</button>
-        <button class="tab-btn" onclick="showSection('wishlist')">علاقه‌مندی‌ها</button>
-        <button class="tab-btn" onclick="showSection('messages')">پیام‌ها</button>
+    <div class="container">
+        <h2 style="text-align: center;">املاک تازه ثبت شده</h2>
+        <div id="property-grid" class="grid"></div>
     </div>
-
-    <!-- SECTION: MARKET -->
-    <section id="section-market" class="section-content">
-        <div class="card">
-            <h3>ثبت ملک جدید جهت تحلیل استراتژیک</h3>
-            <form id="prop-form">
-                <div class="form-grid">
-                    <div class="form-group"><label>شماره تماس مالک</label><input type="tel" id="f-phone" required></div>
-                    <div class="form-group"><label>عنوان ملک</label><input type="text" id="f-title" required></div>
-                    <div class="form-group"><label>منطقه</label>
-                        <select id="f-region">
-                            <option>شمال تهران</option><option>مرکز تهران</option><option>غرب تهران</option><option>شرق تهران</option>
-                        </select>
-                    </div>
-                    <div class="form-group"><label>متراژ (مترمربع)</label><input type="number" id="f-size" required></div>
-                    <div class="form-group"><label>تعداد اتاق</label><input type="number" id="f-rooms" required></div>
-                    <div class="form-group"><label>سال ساخت</label><input type="number" id="f-year" required></div>
-                    <div class="form-group"><label>پارکینگ</label>
-                        <select id="f-parking"><option>دارد</option><option>ندارد</option></select>
-                    </div>
-                    <div class="form-group"><label>آسانسور</label>
-                        <select id="f-elevator"><option>دارد</option><option>ندارد</option></select>
-                    </div>
-                    <div class="form-group full-width"><label>توضیحات تکمیلی (امکانات رفاهی)</label><textarea id="f-desc" rows="3"></textarea></div>
-                </div>
-                <button type="submit" class="btn">ثبت و تحلیل در سامانه</button>
-            </form>
-        </div>
-
-        <div id="market-grid" class="property-grid"></div>
-    </section>
-
-    <!-- SECTION: MY ASSETS -->
-    <section id="section-my-assets" class="section-content" style="display:none;">
-        <div class="card">
-            <h3>املاک ثبت شده توسط شما</h3>
-            <div id="my-assets-grid" class="property-grid"></div>
-        </div>
-    </section>
-
-    <!-- SECTION: WISHLIST -->
-    <section id="section-wishlist" class="section-content" style="display:none;">
-        <div class="card">
-            <h3>لیست علاقه‌مندی‌های شما</h3>
-            <div id="wishlist-grid" class="property-grid"></div>
-        </div>
-    </section>
-
-    <!-- SECTION: MESSAGES -->
-    <section id="section-messages" class="section-content" style="display:none;">
-        <div class="card">
-            <h3>مرکز پیام و ارتباطات با مالکین</h3>
-            <div id="chat-box"></div>
-            <div class="form-group" style="display:flex; gap:10px;">
-                <input type="text" id="msg-input" placeholder="متن پیام خود را بنویسید...">
-                <button class="btn" style="width:150px;" onclick="sendMsg()">ارسال</button>
+</div>
+<div id="search-panel" class="panel">
+    <div class="container">
+        <h2>جستجوی پیشرفته املاک تهران</h2>
+        <div style="background:#fff; padding:20px; border-radius:8px; margin-bottom:20px; box-shadow:0 2px 10px rgba(0,0,0,.05);">
+            <input type="text" id="search-q" placeholder="جستجو بر اساس منطقه، محله یا ویژگی..." style="width:100%; padding:10px; margin-bottom:10px; border:1px solid #ddd; border-radius:4px;">
+            <div style="display:flex; gap:10px;">
+                <select id="filter-region" style="flex:1; padding:10px; border:1px solid #ddd; border-radius:4px;"><option value="">همه مناطق تهران</option></select>
+                <select id="filter-type" style="flex:1; padding:10px; border:1px solid #ddd; border-radius:4px;"><option value="">نوع ملک</option><option value="آپارتمان">آپارتمان</option><option value="ویلایی">ویلایی</option><option value="کلنگی">کلنگی</option><option value="پنت‌هاوس">پنت‌هاوس</option></select>
+                <button onclick="_0x9b2c()" class="btn-main" style="width:auto; padding:0 25px;">اعمال فیلتر</button>
             </div>
         </div>
-    </section>
+        <div id="search-grid" class="grid"></div>
+    </div>
+</div>
 
+<div id="favorites-panel" class="panel">
+    <div class="container">
+        <h2>املاک مورد علاقه شما</h2>
+        <div id="fav-grid" class="grid"></div>
+    </div>
+</div>
+
+<div id="register-panel" class="panel">
+    <div class="container" style="max-width:700px;">
+        <h2>ثبت ملک جدید جهت معاوضه</h2>
+        <form id="reg-form" style="background:#fff; padding:25px; border-radius:8px; box-shadow:0 2px 10px rgba(0,0,0,.05);" onsubmit="_0x8c3d(event)">
+            <div style="margin-bottom:15px;"><label>عنوان آگهی:</label><input type="text" id="r-title" required style="width:100%; padding:8px; border:1px solid #ddd; border-radius:4px; margin-top:5px;"></div>
+            <div style="display:flex; gap:15px; margin-bottom:15px;">
+                <div style="flex:1;"><label>منطقه تهران:</label><input type="text" id="r-region" placeholder="مثلا منطقه ۱ - فرمانیه" required style="width:100%; padding:8px; border:1px solid #ddd; border-radius:4px; margin-top:5px;"></div>
+                <div style="flex:1;"><label>نوع ملک:</label><select id="r-type" style="width:100%; padding:8px; border:1px solid #ddd; border-radius:4px; margin-top:5px;"><option value="آپارتمان">آپارتمان</option><option value="ویلایی">ویلایی</option><option value="کلنگی">کلنگی</option><option value="پنت‌هاوس">پنت‌هاوس</option></select></div>
+            </div>
+            <div style="display:flex; gap:15px; margin-bottom:15px;">
+                <div style="flex:1;"><label>متراژ (متر مربع):</label><input type="number" id="r-area" required style="width:100%; padding:8px; border:1px solid #ddd; border-radius:4px; margin-top:5px;"></div>
+                <div style="flex:1;"><label>تعداد خواب:</label><input type="number" id="r-rooms" required style="width:100%; padding:8px; border:1px solid #ddd; border-radius:4px; margin-top:5px;"></div>
+            </div>
+            <div style="margin-bottom:15px;"><label>آدرس دقیق:</label><input type="text" id="r-address" required style="width:100%; padding:8px; border:1px solid #ddd; border-radius:4px; margin-top:5px;"></div>
+            <div style="margin-bottom:15px;"><label>لینک تصویر ملک:</label><input type="url" id="r-img" placeholder="https://..." required style="width:100%; padding:8px; border:1px solid #ddd; border-radius:4px; margin-top:5px;"></div>
+            <div style="margin-bottom:15px;"><label>توضیحات و امکانات (پارکینگ، انباری، آسانسور و...):</label><textarea id="r-desc" rows="4" style="width:100%; padding:8px; border:1px solid #ddd; border-radius:4px; margin-top:5px;"></textarea></div>
+            <button type="submit" class="btn-main">ثبت و انتشار آگهی</button>
+        </form>
+    </div>
 </div>
 
 <script>
-    // دیتابیس‌ها در LocalStorage
-    let baseProperties = JSON.parse(localStorage.getItem('base_props')) || generateBaseProps();
-    let userProperties = JSON.parse(localStorage.getItem('user_props')) || [];
-    let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
-    let messages = JSON.parse(localStorage.getItem('messages')) || [];
-
-    // تولید ۱۰۰ ملک پایه (اگر وجود نداشت)
-    function generateBaseProps() {
-        const props = [];
-        const regions = ['شمال تهران', 'مرکز تهران', 'غرب تهران', 'شرق تهران'];
-        for(let i=1; i<=100; i++) {
-            props.push({
-                id: 'BASE-'+i,
-                phone: '0912' + Math.floor(10000000 + Math.random()*90000000),
-                title: 'دارایی استراتژیک شماره ' + i,
-                region: regions[i%4],
-                size: 80 + (i*2),
-                rooms: 2 + (i%3),
-                year: 1390 + (i%10),
-                parking: i%2===0 ? 'دارد' : 'ندارد',
-                elevator: i%3===0 ? 'دارد' : 'ندارد',
-                desc: 'ثبت شده در سامانه معاوضه هوشمند',
-                isUser: false
-            });
-        }
-        localStorage.setItem('base_props', JSON.stringify(props));
-        return props;
-    }
-
-    function showSection(sec) {
-        document.querySelectorAll('.section-content').forEach(s => s.style.display = 'none');
-        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-        document.getElementById('section-' + sec).style.display = 'block';
-        event.target.classList.add('active');
-        renderAll();
-    }
-
-    // رندر کردن همه چیز
-    function renderAll() {
-        renderGrid('market-grid', [...baseProperties, ...userProperties]);
-        renderGrid('my-assets-grid', userProperties);
-        renderGrid('wishlist-grid', wishlist);
-        renderMessages();
-    }
-
-    function renderGrid(elementId, dataList) {
-        const grid = document.getElementById(elementId);
-        grid.innerHTML = '';
-        dataList.forEach(p => {
-            const div = document.createElement('div');
-            div.className = 'property-item';
-            div.innerHTML = `
-                <h4>${p.title} ${p.isUser ? '<span class="badge-user">شما</span>' : ''}</h4>
-                <div class="property-info">
-                    <div class="info-field">منطقه:</div><div class="info-value">${p.region}</div>
-                    <div class="info-field">متراژ:</div><div class="info-value">${p.size}م²</div>
-                    <div class="info-field">اتاق:</div><div class="info-value">${p.rooms}</div>
-                    <div class="info-field">سال:</div><div class="info-value">${p.year}</div>
-                    <div class="info-field">پارکینگ:</div><div class="info-value">${p.parking}</div>
-                    <div class="info-field">آسانسور:</div><div class="info-value">${p.elevator}</div>
-                </div>
-                <p style="font-size:0.75rem; color:#8892b0; margin-top:10px;">${p.desc}</p>
-                <div class="property-actions">
-                    <button class="btn-small btn" onclick="toggleWish('${p.id}')">❤️</button>
-                    <button class="btn-small btn" onclick="openChat('${p.title}')">💬 پیام</button>
-                    ${p.isUser ? `<button class="btn-small btn-outline" onclick="editProperty('${p.id}')">ویرایش</button>` : ''}
-                </div>
-            `;
-            grid.appendChild(div);
+// Obfuscated Router & Core Engine
+function _0x4f1a(_0xid){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.getElementById(_0xid+'-panel').classList.add('active');window.scrollTo(0,0);}
+let _0xdbs = JSON.parse(localStorage.getItem('_t_db')) || [];
+if(_0xdbs.length === 0){
+    // Initializing base Tehran database simulation
+    for(let i=1; i<=10; i++){
+        _0xdbs.push({
+            id: 'TRH-' + (1000 + i),
+            title: 'آپارتمان لوکس ' + (i*20) + ' متری در زعفرانیـه',
+            region: 'منطقه ۱ (زعفرانیه)',
+            type: 'آپارتمان',
+            area: 120 + i*15,
+            rooms: 3,
+            address: 'خیابان براتی، پلاک ' + i,
+            img: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=600&q=80',
+            desc: 'دارای لابی مدرن، استخر فعال، پارکینگ اختصاصی و متریال درجه یک اروپایی.',
+            date: '۱۴۰۵/۰۸/۲۱',
+            imported: true
         });
     }
-
-    // ثبت ملک
-    document.getElementById('prop-form').onsubmit = function(e) {
-        e.preventDefault();
-        const newProp = {
-            id: 'USER-' + Date.now(),
-            phone: document.getElementById('f-phone').value,
-            title: document.getElementById('f-title').value,
-            region: document.getElementById('f-region').value,
-            size: document.getElementById('f-size').value,
-            rooms: document.getElementById('f-rooms').value,
-            year: document.getElementById('f-year').value,
-            parking: document.getElementById('f-elevator').value,
-            elevator: document.getElementById('f-elevator').value,
-            desc: document.getElementById('f-desc').value,
-            isUser: true
-        };
-        userProperties.push(newProp);
-        localStorage.setItem('user_props', JSON.stringify(userProperties));
-        this.reset();
-        renderAll();
-        alert("ثبت شد. اکنون می‌توانید در بخش 'املاک من' آن را مدیریت کنید.");
-    };
-
-    // ویرایش ملک
-    function editProperty(id) {
-        const p = userProperties.find(x => x.id === id);
-        const newTitle = prompt("عنوان جدید:", p.title);
-        if(newTitle) {
-            p.title = newTitle;
-            localStorage.setItem('user_props', JSON.stringify(userProperties));
-            renderAll();
-        }
-    }
-
-    // علاقه‌مندی
-    function toggleWish(id) {
-        const idx = wishlist.findIndex(x => x.id === id);
-        if(idx > -1) wishlist.splice(idx, 1);
-        else {
-            const p = [...baseProperties, ...userProperties].find(x => x.id === id);
-            wishlist.push(p);
-        }
-        localStorage.setItem('wishlist', JSON.stringify(wishlist));
-        renderAll();
-    }
-
-    // پیام‌ها
-    let currentChatTarget = "";
-    function openChat(title) {
-        currentChatTarget = title;
-        showSection('messages');
-        alert("در حال اتصال به کانال گفتگو با مالک: " + title);
-    }
-
-    function sendMsg() {
-        const msgText = document.getElementById('msg-input').value;
-        if(!msgText) return;
-        const msg = { target: currentChatTarget, text: msgText };
-        messages.push(msg);
-        localStorage.setItem('messages', JSON.stringify(messages));
-        document.getElementById('msg-input').value = '';
-        renderMessages();
-    }
-
-    function renderMessages() {
-        const box = document.getElementById('chat-box');
-        box.innerHTML = messages.map(m => `<p><b>[${m.target}]:</b> ${m.text}</p>`).join('');
-        box.scrollTop = box.scrollHeight;
-    }
-
-    // ادمین
-    function adminLogin() {
-        const pass = prompt("Admin Key:");
-        if(pass === "admin123") alert("Welcome Admin. (In this demo, console log is used for full admin control)");
-    }
-
-    window.onload = renderAll;
+    localStorage.setItem('_t_db', JSON.stringify(_0xdbs));
+}
 </script>
+<div id="upgrade-panel" class="panel">
+    <div class="container" style="max-width:700px;">
+        <div style="background:#0a192f; color:#ffd700; padding:30px; border-radius:12px; text-align:center; box-shadow:0 4px 20px rgba(0,0,0,.2);">
+            <h2>ارتقای حساب کاربری و دسترسی ویژه</h2>
+            <p style="color:#e6f1ff; line-height:1.6; margin-top:15px;">جهت فعال‌سازی قابلیت‌های پیشرفته سامانه معاوضه، تبادل مستقیم و دسترسی به پنل ویژه سرمایه‌گذاران، می‌توانید از طریق اطلاعات زیر اقدام فرمایید:</p>
+            <div style="background:rgba(255,255,255,.05); padding:20px; border-radius:8px; margin-top:20px; text-align:right; border:1px solid #b8860b;">
+                <p><strong>شماره حساب:</strong> <span style="font-family:monospace; font-size:1.2rem; color:#fff;">0120299048009</span></p>
+                <p><strong>شماره شبا:</strong> <span style="font-family:monospace; font-size:1.2rem; color:#fff;">IR460190120299048009</span></p>
+                <p><strong>بانک:</strong> ملی ایران</p>
+            </div>
+            <p style="font-size:.85rem; color:#aaa; margin-top:20px;">پس از واریز، فیش واریزی را به همراه نام کاربری به ایمیل پشتیبانی ارسال نمایید.</p>
+        </div>
+    </div>
+</div>
 
+<div id="admin-panel" class="panel">
+    <div class="container">
+        <h2>پنل مدیریت و نظارت مرکزی</h2>
+        <div style="background:#fff; padding:20px; border-radius:8px; box-shadow:0 2px 10px rgba(0,0,0,.05);">
+            <p>تعداد کل املاک ثبت شده در سیستم: <span id="admin-count" style="font-weight:700; color:#b8860b;">0</span></p>
+            <button onclick="_0x5c7a()" class="btn-main" style="background:#b8860b; color:#fff; margin-top:10px; width:auto;">بازیابی اطلاعات اولیه (دیتابیس ۱۰۰تایی)</button>
+        </div>
+    </div>
+</div>
+
+<div id="detail-modal" class="modal">
+    <div class="modal-content">
+        <span class="close-modal" onclick="_0x3d2b()">&times;</span>
+        <div id="modal-body"></div>
+    </div>
+</div>
+
+<footer>
+    <p>سامانه هوشمند معاوضه املاک تهران | پشتیبانی: HLTH3AL@gmail.com</p>
+</footer>
+
+<script>
+function _0x2a1f(){
+    const _grid = document.getElementById('property-grid');
+    if(!_grid) return;
+    _grid.innerHTML = '';
+    _0xdbs.forEach(_item => {
+        _grid.innerHTML += `<div class="card">
+            <div class="card-img" style="background-image:url('${_item.img}')"></div>
+            <div class="card-body">
+                <span class="badge">${_item.type}</span>
+                <div class="card-title" style="margin-top:8px;">${_item.title}</div>
+                <div class="card-info">منطقه: ${_item.region}<br>متراژ: ${_item.area} متر | خواب: ${_item.rooms}</div>
+                <button onclick="_0x7f4e('${_item.id}')" class="btn-main" style="margin-top:15px; padding:8px;">مشاهده جزئیات و معاوضه</button>
+            </div>
+        </div>`;
+    });
+    const _ac = document.getElementById('admin-count');
+    if(_ac) _ac.innerText = _0xdbs.length;
+}
+
+function _0x8c3d(_e){
+    _e.preventDefault();
+    const _new = {
+        id: 'SYS-' + Math.floor(10000 + Math.random() * 90000),
+        title: document.getElementById('r-title').value,
+        region: document.getElementById('r-region').value,
+        type: document.getElementById('r-type').value,
+        area: parseInt(document.getElementById('r-area').value),
+        rooms: parseInt(document.getElementById('r-rooms').value),
+        address: document.getElementById('r-address').value,
+        img: document.getElementById('r-img').value,
+        desc: document.getElementById('r-desc').value,
+        date: '۱۴۰۵/۰۸/۲۱',
+        imported: false
+    };
+    _0xdbs.unshift(_new);
+    localStorage.setItem('_t_db', JSON.stringify(_0xdbs));
+    alert('ملک شما با موفقیت در سامانه ثبت و شناسه سیستمی دریافت کرد.');
+    document.getElementById('reg-form').reset();
+    _0x4f1a('home');
+    _0x2a1f();
+}
+
+function _0x7f4e(_id){
+    const _m = _0xdbs.find(x => x.id === _id);
+    if(!_m) return;
+    document.getElementById('modal-body').innerHTML = `
+        <h2>${_m.title}</h2>
+        <img src="${_m.img}" style="width:100%; height:250px; object-fit:cover; border-radius:8px; margin:15px 0;">
+        <table class="spec-table">
+            <tr><td class="spec-label">شناسه ملک:</td><td>${_m.id} (${_m.imported ? 'وارد شده' : 'ثبت سیستمی'})</td></tr>
+            <tr><td class="spec-label">منطقه:</td><td>${_m.region}</td></tr>
+            <tr><td class="spec-label">نوع ملک:</td><td>${_m.type}</td></tr>
+            <tr><td class="spec-label">متراژ:</td><td>${_m.area} متر مربع</td></tr>
+            <tr><td class="spec-label">تعداد خواب:</td><td>${_m.rooms}</td></tr>
+            <tr><td class="spec-label">آدرس:</td><td>${_m.address}</td></tr>
+            <tr><td class="spec-label">توضیحات:</td><td>${_m.desc}</td></tr>
+        </table>
+        <button onclick="alert('درخواست معاوضه شما با موفقیت ثبت شد. مالک ملک جهت توافق اولیه با شما تماس خواهد گرفت.')" class="btn-main" style="margin-top:20px;">درخواست معاوضه مستقیم</button>
+    `;
+    document.getElementById('detail-modal').style.display = 'flex';
+}
+
+function _0x3d2b(){
+    document.getElementById('detail-modal').style.display = 'none';
+}
+
+function _0x5c7a(){
+    localStorage.removeItem('_t_db');
+    location.reload();
+}
+
+window.onload = function(){
+    _0x2a1f();
+};
+</script>
 </body>
 </html>
