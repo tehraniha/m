@@ -1,104 +1,504 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<title>Tehran Smart Property Exchange [Secure Obfuscated]</title>
-<style>
-:root{--p:#1e3a8a;--s:#0f172a;--a:#dc2626;--b:#f8fafc;--c:#fff;--t:#1e293b;--br:#cbd5e1}
-*{box-sizing:border-box;margin:0;padding:0;font-family:Tahoma,sans-serif}
-body{background:var(--b);color:var(--t);line-height:1.6}
-header{background:var(--s);color:#fff;padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center;border-bottom:4px solid var(--a)}
-nav{display:flex;gap:1rem}
-nav button{background:transparent;border:1px solid #475569;color:#fff;padding:.5rem 1rem;cursor:pointer;border-radius:4px}
-nav button.active,nav button:hover{background:var(--p)}
-.container{max-width:1200px;margin:2rem auto;padding:0 1rem}
-.alert{border:2px dashed var(--a);background:#fef2f2;padding:1rem;border-radius:8px;margin-bottom:1.5rem}
-.card{background:var(--c);border:1px solid var(--br);border-radius:8px;padding:1.5rem;margin-bottom:1.5rem}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1rem}
-input,select,textarea{width:100%;padding:.75rem;border:1px solid var(--br);border-radius:4px}
-.btn{background:var(--p);color:#fff;border:none;padding:.75rem 1.5rem;cursor:pointer;border-radius:4px;font-weight:bold}
-.tab{display:none}
-.tab.active{display:block}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سامانه تخصصی معاوضه هوشمند املاک تهران</title>
+    <style>
+        :root {
+            --primary: #1e3a8a;
+            --secondary: #0f172a;
+            --accent: #dc2626;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text: #1e293b;
+            --border: #cbd5e1;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: Tahoma, sans-serif; }
+        body { background: var(--bg); color: var(--text); line-height: 1.6; }
+        header { background: var(--secondary); color: #fff; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 4px solid var(--accent); flex-wrap: wrap; gap: 1rem; }
+        .logo { font-size: 1.25rem; font-weight: bold; display: flex; align-items: center; gap: 0.5rem; }
+        nav { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+        nav button { background: transparent; border: 1px solid #475569; color: #fff; padding: 0.5rem 1rem; cursor: pointer; border-radius: 4px; transition: 0.2s; font-size: 0.9rem; }
+        nav button:hover, nav button.active { background: var(--primary); border-color: var(--primary); }
+        
+        .container { max-width: 1200px; margin: 2rem auto; padding: 0 1rem; }
+        
+        /* Security Alert Box */
+        .security-alert {
+            border: 2px dashed var(--accent);
+            background: #fef2f2;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .security-alert span { font-size: 1.5rem; color: var(--accent); }
+
+        .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        h2 { color: var(--primary); margin-bottom: 1rem; border-bottom: 2px solid var(--primary); padding-bottom: 0.5rem; }
+
+        .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-bottom: 1rem; }
+        .form-group { display: flex; flex-direction: column; gap: 0.5rem; }
+        label { font-weight: bold; font-size: 0.9rem; }
+        input, select, textarea { padding: 0.75rem; border: 1px solid var(--border); border-radius: 4px; font-size: 1rem; background: #fff; }
+        button.btn { background: var(--primary); color: #fff; border: none; padding: 0.75rem 1.5rem; cursor: pointer; border-radius: 4px; font-weight: bold; transition: 0.2s; }
+        button.btn:hover { background: #1e40af; }
+        button.btn-danger { background: var(--accent); }
+        button.btn-danger:hover { background: #b91c1c; }
+        button.btn-success { background: #16a34a; }
+        button.btn-success:hover { background: #15803d; }
+
+        .properties-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+        .prop-card { background: #fff; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; position: relative; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        .prop-img { width: 100%; height: 200px; object-fit: cover; background: #e2e8f0; }
+        .prop-body { padding: 1rem; }
+        .prop-title { font-size: 1.1rem; font-weight: bold; color: var(--primary); margin-bottom: 0.5rem; }
+        .prop-details { font-size: 0.9rem; color: #64748b; margin-bottom: 1rem; display: flex; flex-direction: column; gap: 0.3rem; }
+        .prop-actions { display: flex; gap: 0.5rem; }
+
+        .fav-btn { position: absolute; top: 10px; left: 10px; background: rgba(255,255,255,0.9); border: none; border-radius: 50%; width: 40px; height: 40px; font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 4px rgba(0,0,0,0.2); z-index: 10; }
+        .fav-btn.active { color: var(--accent); }
+
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        
+        .bank-info { background: #f0fdf4; border: 1px solid #bbf7d0; padding: 1rem; border-radius: 6px; margin-top: 1rem; }
+    </style>
 </head>
 <body>
-<header>
-<div>سامانه تخصصی معاوضه هوشمند املاک (نسخه ایمن)</div>
-<nav>
-<button onclick="_0xTab('m')" class="active">بازار</button>
-<button onclick="_0xTab('r')">ثبت ملک</button>
-<button onclick="_0xTab('e')">معاوضه (<span id="_0xEx">قفل</span>)</button>
-<button onclick="_0xTab('a')">مدیریت</button>
-</nav>
-</header>
-<div class="container">
-<div class="alert"><strong>سیستم رمزنگاری محلی فعال است.</strong> تبادل املاک صرفاً تهرانی و بدون قیمت نقدی.</div>
-<div id="m" class="tab active">
-<h2>املاک تایید شده</h2>
-<div id="_0xList" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem;margin-top:1rem;"></div>
-</div>
-<div id="r" class="tab">
-<h2>ثبت ملک جدید</h2>
-<div class="card">
-<form onsubmit="_0xReg(event)">
-<div class="grid">
-<div><label>عنوان</label><input type="text" id="_t" required></div>
-<div><label>منطقه</label><select id="_rg"><option>منطقه ۱</option><option>منطقه ۲</option><option>منطقه ۳</option><option>منطقه ۴</option><option>منطقه ۵</option></select></div>
-<div><label>متراژ</label><input type="number" id="_ar" required></div>
-<div><label>تصویر URL</label><input type="url" id="_img" value="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=600" required></div>
-</div>
-<button type="submit" class="btn" style="margin-top:1rem;">ثبت و بازگشایی معاوضه</button>
-</form>
-</div>
-</div>
-<div id="e" class="tab">
-<h2>موتور معاوضه</h2>
-<div id="_0xExBox" class="card"></div>
-</div>
-<div id="a" class="tab">
-<h2>مدیریت</h2>
-<div class="card">
-<p>املاک ثبت شده: <span id="_0xCnt">0</span></p>
-<button class="btn" style="background:var(--a);margin-top:1rem;" onclick="_0xRst()">پاکسازی دیتابیس</button>
-</div>
-</div>
-</div>
-<script>
-const _k = '_tehran_exchange_db';
-function _0xGet(){try{return JSON.parse(localStorage.getItem(_k))||[];}catch(e){return[];}}
-function _0xTab(id){
-document.querySelectorAll('.tab').forEach(e=>e.classList.remove('active'));
-document.querySelectorAll('nav button').forEach(e=>e.classList.remove('active'));
-document.getElementById(id).classList.add('active');
-event.target.classList.add('active');
-if(id==='m')_0xRend();
-if(id==='e')_0xExLoad();
-if(id==='a')document.getElementById('_0xCnt').innerText=_0xGet().length;
-}
-function _0xReg(e){
-e.preventDefault();
-let d=_0xGet();
-d.push({id:Date.now(),title:document.getElementById('_t').value,region:document.getElementById('_rg').value,area:document.getElementById('_ar').value,img:document.getElementById('_img').value});
-localStorage.setItem(_k,JSON.stringify(d));
-alert('ملک ثبت شد!');
-document.getElementById('_0xEx').innerText='باز';
-_0xTab('m');
-}
-function _0xRend(){
-let d=_0xGet(),c=document.getElementById('_0xList');
-c.innerHTML='';
-if(d.length===0){c.innerHTML='<p>هیچ ملکی ثبت نشده است.</p>';return;}
-d.forEach(i=>{
-c.innerHTML+=`<div class="card"><img src="${i.img}" style="width:100%;height:150px;object-fit:cover;border-radius:4px"><h3>${i.title}</h3><p>${i.region} - ${i.area} متر</p><button class="btn" style="margin-top:.5rem" onclick="alert('درخواست معاوضه ارسال شد.')">درخواست معاوضه</button></div>`;
-});
-}
-function _0xExLoad(){
-let d=_0xGet(),b=document.getElementById('_0xExBox');
-if(d.length===0){b.innerHTML='<h3>دسترسی قفل است</h3><p>لطفاً ابتدا ملکی ثبت کنید.</p>';}
-else{b.innerHTML=`<h3>سیستم معاوضه فعال</h3><p>شما ${d.length} ملک ثبتی دارید و واجد شرایط تبادل هوشمند هستید.</p>`;}
-}
-function _0xRst(){localStorage.removeItem(_k);alert('پاک شد.');_0xRend();}
-window.onload=()=>_0xRend();
-</script>
+
+    <header>
+        <div class="logo">🏢 سامانه تخصصی معاوضه هوشمند املاک تهران</div>
+        <nav>
+            <button onclick="switchTab('market')" id="btn-market" class="active">بازار املاک</button>
+            <button onclick="switchTab('register')" id="btn-register">ثبت ملک من</button>
+            <button onclick="switchTab('exchange')" id="btn-exchange">درخواست‌های معاوضه (<span id="exchangeCount">قفل</span>)</button>
+            <button onclick="switchTab('favorites')" id="btn-favorites">نشان‌شده‌ها (<span id="favCount">0</span>)</button>
+            <button onclick="switchTab('admin')" id="btn-admin">پنل مدیریت</button>
+            <button onclick="switchTab('upgrade')" id="btn-upgrade">ارتقا پنل</button>
+        </nav>
+    </header>
+
+    <div class="container">
+        <!-- Security Alert -->
+        <div class="security-alert">
+            <span>🔒</span>
+            <div>
+                <strong>حالت اجرایی امنیتی محلی (Local Storage):</strong> سامانه مجهز به موتور پردازش مقایسه‌ای نسبی ارزش املاک در مناطق ۲۲ گانه تهران است. قیمت نقدی حذف شده و معاملات صرفاً بر مبنای تهاتر ملکی انجام می‌پذیرد.
+            </div>
+        </div>
+
+        <!-- 1. Market Tab -->
+        <div id="market" class="tab-content active">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 1rem;">
+                <h2>بازار املاک تهران (معاوضه مستقیم)</h2>
+                <button class="btn btn-success" onclick="loadDemoData()">⚡ بارگذاری آنی املاک نمونه تهران</button>
+            </div>
+            <div style="margin-bottom: 1rem;">
+                <input type="text" id="searchInput" placeholder="جستجو بر اساس محله، منطقه یا ویژگی..." style="width: 100%; padding: 0.75rem;" oninput="filterProperties()">
+            </div>
+            <div id="propertyList" class="properties-grid">
+                <!-- Loaded dynamically -->
+            </div>
+        </div>
+
+        <!-- 2. Register Property Tab -->
+        <div id="register" class="tab-content">
+            <h2>ثبت ملک جدید جهت معاوضه</h2>
+            <div class="card">
+                <form id="propForm" onsubmit="registerProperty(event)">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>عنوان ملک</label>
+                            <input type="text" id="pTitle" required placeholder="مثلاً: آپارتمان ۱۲۰ متری نیاوران">
+                        </div>
+                        <div class="form-group">
+                            <label>منطقه تهران</label>
+                            <select id="pRegion" required>
+                                <option value="">انتخاب منطقه</option>
+                                <script>
+                                    for(let i=1; i<=22; i++) document.write(`<option value="منطقه ${i}">منطقه ${i}</option>`);
+                                </script>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>نوع ملک</label>
+                            <select id="pType" required>
+                                <option value="آپارتمان مسکونی">آپارتمان مسکونی</option>
+                                <option value="ویلایی">ویلایی</option>
+                                <option value="مستغلات">مستغلات</option>
+                                <option value="زمین کلنگی">زمین کلنگی</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>متراژ (مترمربع)</label>
+                            <input type="number" id="pArea" required min="20" placeholder="مثلاً ۱۲۰">
+                        </div>
+                        <div class="form-group">
+                            <label>تعداد خواب</label>
+                            <select id="pRooms">
+                                <option value="۰">بدون خواب</option>
+                                <option value="۱">۱ خوابه</option>
+                                <option value="۲" selected>۲ خوابه</option>
+                                <option value="۳">۳ خوابه</option>
+                                <option value="۴+">۴ خوابه یا بیشتر</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>سال ساخت</label>
+                            <input type="number" id="pYear" required value="1402" min="1350" max="1405">
+                        </div>
+                        <div class="form-group">
+                            <label>جهت ساختمان</label>
+                            <select id="pDirection">
+                                <option value="شمالی">شمالی</option>
+                                <option value="جنوبی">جنوبی</option>
+                                <option value="شرقی">شرقی</option>
+                                <option value="غربی">غربی</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>آدرس دقیق</label>
+                            <input type="text" id="pAddress" required placeholder="خیابان، پلاک، طبقه">
+                        </div>
+                        <div class="form-group" style="grid-column: span 2;">
+                            <label>لینک تصویر ملک (URL)</label>
+                            <input type="url" id="pImage" required value="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=600" placeholder="https://...">
+                        </div>
+                        <div class="form-group" style="grid-column: span 2;">
+                            <label>توضیحات تکمیلی و شرایط معاوضه</label>
+                            <textarea id="pDesc" rows="3" placeholder="امکانات، وضعیت سند، تمایل به معاوضه با چه منطقه ای..."></textarea>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn">ثبت قطعی ملک و فعال‌سازی معاوضه</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- 3. Exchange Tab -->
+        <div id="exchange" class="tab-content">
+            <h2>موتور محاسباتی و پیشنهادهای معاوضه هوشمند</h2>
+            <div id="exchangeContainer">
+                <!-- Content injected dynamically -->
+            </div>
+        </div>
+
+        <!-- 4. Favorites Tab -->
+        <div id="favorites" class="tab-content">
+            <h2>املاک نشان‌شده (علاقه‌مندی‌ها)</h2>
+            <div id="favList" class="properties-grid">
+                <!-- Loaded dynamically -->
+            </div>
+        </div>
+
+        <!-- 5. Admin Tab -->
+        <div id="admin" class="tab-content">
+            <h2>پنل مدیریت و نظارت سامانه</h2>
+            <div class="card">
+                <p><strong>تعداد املاک ثبت شده کاربران:</strong> <span id="adminPropCount">0</span></p>
+                <p style="margin: 1rem 0;">وضعیت سیستم: <strong>فعال (برخط امن محلی)</strong></p>
+                <button class="btn btn-danger" onclick="resetDatabase()">بازنشانی کامل پایگاه داده (صفر کردن اطلاعات)</button>
+            </div>
+        </div>
+
+        <!-- 6. Upgrade Tab -->
+        <div id="upgrade" class="tab-content">
+            <h2>ارتقای حساب کاربری و امکانات ویژه</h2>
+            <div class="card">
+                <p>با ارتقای پنل به سطح حرفه‌ای، از موتور تطبیق هوش مصنوعی پیشرفته، دسترسی نامحدود به فایل‌های ویژه و ارجوی اولویت‌دار برخوردار شوید.</p>
+                <div class="bank-info">
+                    <h3>اطلاعات حساب بانکی جهت واریز وجه ارتقا:</h3>
+                    <p style="margin-top: 0.5rem;">نام بانک: <strong>بانک صادرات ایران</strong></p>
+                    <p>شماره حساب: <strong>0120299048009</strong></p>
+                    <p>شماره شبا: <strong>IR460190120299048009</strong></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Default Demo Data for instant usability
+        const defaultDemoProperties = [
+            {
+                id: 'PROP_DEMO_1',
+                title: 'آپارتمان ۱۵۰ متری لوکس در زعفرانیه',
+                region: 'منطقه ۱',
+                type: 'آپارتمان مسکونی',
+                area: '150',
+                rooms: '۳',
+                year: '1401',
+                direction: 'شمالی',
+                address: 'مقدس اردبیلی، پلاک ۴۲',
+                image: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=600',
+                desc: 'دارای استخر، سونا، جکوزی، دو پارکینگ سندی. تمایل به معاوضه با ویلا در لواسان یا آپارتمان در منطقه ۲.',
+                date: '۱۴۰۵/۰۸/۲۱'
+            },
+            {
+                id: 'PROP_DEMO_2',
+                title: 'پنت‌هاوس ۱۸۰ متری سعادت‌آباد',
+                region: 'منطقه ۲',
+                type: 'آپارتمان مسکونی',
+                area: '180',
+                rooms: '۳',
+                year: '1403',
+                direction: 'جنوبی',
+                address: 'بلوار شهرداری، کوچه ۳',
+                image: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=600',
+                desc: 'ویوی ابدی تهران، روف گاردن اختصاصی، متریال درجه یک ایتالیایی.',
+                date: '۱۴۰۵/۰۸/۲۱'
+            },
+            {
+                id: 'PROP_DEMO_3',
+                title: 'ویلایی ۳۰۰ متری دربند',
+                region: 'منطقه ۱',
+                type: 'ویلایی',
+                area: '300',
+                rooms: '۴+',
+                year: '1398',
+                direction: 'شرقی',
+                address: 'خیابان دربند، کوچه باغ',
+                image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600',
+                desc: 'حیاط سرسبز، سند تک برگ، موقعیت استثنایی برای معاوضه.',
+                date: '۱۴۰۵/۰۸/۲۱'
+            }
+        ];
+
+        // Database Functions
+        function getDB() {
+            try {
+                let db = JSON.parse(localStorage.getItem('_tehran_exchange_db'));
+                if (!db) {
+                    db = defaultDemoProperties;
+                    localStorage.setItem('_tehran_exchange_db', JSON.stringify(db));
+                }
+                return db;
+            } catch(e) { return defaultDemoProperties; }
+        }
+
+        function saveDB(db) {
+            localStorage.setItem('_tehran_exchange_db', JSON.stringify(db));
+        }
+
+        function getFavs() {
+            try {
+                return JSON.parse(localStorage.getItem('_tehran_favs')) || [];
+            } catch(e) { return []; }
+        }
+        function saveFavs(favs) {
+            localStorage.setItem('_tehran_favs', JSON.stringify(favs));
+        }
+
+        // Tab Switching
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('nav button').forEach(el => el.classList.remove('active'));
+            
+            document.getElementById(tabId).classList.add('active');
+            document.getElementById('btn-' + tabId).classList.add('active');
+
+            if(tabId === 'market') renderMarket();
+            if(tabId === 'favorites') renderFavs();
+            if(tabId === 'exchange') renderExchange();
+            if(tabId === 'admin') updateAdminStats();
+        }
+
+        // Load Demo Data Button Action
+        function loadDemoData() {
+            saveDB(defaultDemoProperties);
+            alert('املاک نمونه تهرانی با موفقیت بارگذاری شدند!');
+            renderMarket();
+            updateBadges();
+        }
+
+        // Register Property
+        function registerProperty(e) {
+            e.preventDefault();
+            const db = getDB();
+            const newProp = {
+                id: 'PROP_' + Date.now(),
+                title: document.getElementById('pTitle').value,
+                region: document.getElementById('pRegion').value,
+                type: document.getElementById('pType').value,
+                area: document.getElementById('pArea').value,
+                rooms: document.getElementById('pRooms').value,
+                year: document.getElementById('pYear').value,
+                direction: document.getElementById('pDirection').value,
+                address: document.getElementById('pAddress').value,
+                image: document.getElementById('pImage').value,
+                desc: document.getElementById('pDesc').value,
+                date: new Date().toLocaleDateString('fa-IR')
+            };
+
+            db.push(newProp);
+            saveDB(db);
+            alert('ملک شما با موفقیت ثبت شد و قابلیت‌های معاوضه باز شدند!');
+            document.getElementById('propForm').reset();
+            switchTab('market');
+        }
+
+        // Render Market
+        function renderMarket(filter = '') {
+            const db = getDB();
+            const favs = getFavs();
+            const container = document.getElementById('propertyList');
+            container.innerHTML = '';
+
+            const filtered = db.filter(p => 
+                p.title.includes(filter) || p.region.includes(filter) || p.type.includes(filter) || p.address.includes(filter)
+            );
+
+            if(filtered.length === 0) {
+                container.innerHTML = '<p style="grid-column: span 2; text-align: center; color: #64748b; padding: 2rem;">هیچ ملکی یافت نشد. دکمه «بارگذاری آنی املاک نمونه» را بزنید.</p>';
+                return;
+            }
+
+            filtered.forEach(p => {
+                const isFav = favs.includes(p.id);
+                const card = document.createElement('div');
+                card.className = 'prop-card';
+                card.innerHTML = `
+                    <button class="fav-btn ${isFav ? 'active' : ''}" onclick="toggleFav('${p.id}')">♥</button>
+                    <img src="${p.image}" class="prop-img" alt="تصویر ملک">
+                    <div class="prop-body">
+                        <div class="prop-title">${p.title}</div>
+                        <div class="prop-details">
+                            <span>📍 ${p.region} - ${p.address}</span>
+                            <span>📐 متراژ: ${p.area} متر | 🛏️ ${p.rooms} خواب | 🏗️ ساخت: ${p.year}</span>
+                            <span>🏢 نوع: ${p.type} | جهت: ${p.direction}</span>
+                        </div>
+                        <p style="font-size: 0.85rem; margin-bottom: 1rem; color: #334155;">${p.desc || 'بدون توضیحات تکمیلی.'}</p>
+                        <div class="prop-actions">
+                            <button class="btn" style="flex: 1;" onclick="proposeExchange('${p.id}')">درخواست معاوضه هوشمند</button>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+            updateBadges();
+        }
+
+        function filterProperties() {
+            const query = document.getElementById('searchInput').value;
+            renderMarket(query);
+        }
+
+        // Favorites
+        function toggleFav(id) {
+            let favs = getFavs();
+            if(favs.includes(id)) {
+                favs = favs.filter(i => i !== id);
+            } else {
+                favs.push(id);
+            }
+            saveFavs(favs);
+            renderMarket(document.getElementById('searchInput').value);
+            if(document.getElementById('favorites').classList.contains('active')) renderFavs();
+            updateBadges();
+        }
+
+        function renderFavs() {
+            const db = getDB();
+            const favs = getFavs();
+            const container = document.getElementById('favList');
+            container.innerHTML = '';
+
+            const favProps = db.filter(p => favs.includes(p.id));
+            if(favProps.length === 0) {
+                container.innerHTML = '<p style="grid-column: span 2; text-align: center; color: #64748b; padding: 2rem;">هیچ ملکی نشان نشده است. روی قلب (♥) روی کارت‌ها کلیک کنید.</p>';
+                return;
+            }
+
+            favProps.forEach(p => {
+                const card = document.createElement('div');
+                card.className = 'prop-card';
+                card.innerHTML = `
+                    <button class="fav-btn active" onclick="toggleFav('${p.id}')">♥</button>
+                    <img src="${p.image}" class="prop-img" alt="تصویر ملک">
+                    <div class="prop-body">
+                        <div class="prop-title">${p.title}</div>
+                        <div class="prop-details">
+                            <span>📍 ${p.region} - ${p.address}</span>
+                            <span>📐 متراژ: ${p.area} متر | 🛏️ ${p.rooms} خواب</span>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // Exchange Logic
+        function renderExchange() {
+            const db = getDB();
+            const container = document.getElementById('exchangeContainer');
+            
+            if(db.length === 0) {
+                container.innerHTML = `
+                    <div class="card" style="text-align: center; border-color: var(--accent);">
+                        <h3 style="color: var(--accent); margin-bottom: 1rem;">دسترسی به بخش معاوضه قفل است!</h3>
+                        <p style="margin-bottom: 1rem;">برای باز شدن بخش معاوضه، حداقل یک ملک در سامانه ثبت کنید یا از دکمه بارگذاری نمونه در بازار استفاده کنید.</p>
+                        <button class="btn" onclick="switchTab('register')">ثبت ملک من</button>
+                    </div>
+                `;
+                document.getElementById('exchangeCount').innerText = 'قفل';
+            } else {
+                container.innerHTML = `
+                    <div class="card">
+                        <h3>سیستم انطباق نسبی ارزش املاک تهران</h3>
+                        <p style="margin-bottom: 1rem;">شما ${db.length} ملک ثبتی در پایگاه داده دارید. موتور هوشمند آماده تطبیق و پیشنهاد معاوضه متقابل است.</p>
+                        <div style="background: #f8fafc; padding: 1rem; border-radius: 6px; border: 1px solid var(--border); margin-bottom: 1rem;">
+                            <p><strong>پیشنهاد اولویت‌دار:</strong> تطابق ارزش ملک شما با محدوده مناطق ۱ و ۲ تهران بر اساس شاخص نسبی.</p>
+                            <button class="btn" style="margin-top: 1rem;" onclick="alert('پیام چت شبیه‌سازی شده با موفقیت ارسال شد.')">ارسال پیام چت به مالک متقابل</button>
+                        </div>
+                    </div>
+                `;
+                document.getElementById('exchangeCount').innerText = 'باز';
+            }
+        }
+
+        function proposeExchange(id) {
+            const db = getDB();
+            if(db.length === 0) {
+                alert('خطا: ابتدا باید ملکی ثبت کنید.');
+                switchTab('register');
+                return;
+            }
+            alert('درخواست معاوضه هوشمند شما برای این ملک ثبت و به سیستم ارسال شد.');
+            switchTab('exchange');
+        }
+
+        // Admin & DB Reset
+        function updateAdminStats() {
+            const db = getDB();
+            document.getElementById('adminPropCount').innerText = db.length;
+        }
+
+        function resetDatabase() {
+            if(confirm('آیا از پاک کردن تمام املاک اطمینان دارید؟')) {
+                localStorage.removeItem('_tehran_exchange_db');
+                localStorage.removeItem('_tehran_favs');
+                alert('پایگاه داده پاک شد.');
+                renderMarket();
+                updateAdminStats();
+                updateBadges();
+            }
+        }
+
+        function updateBadges() {
+            const db = getDB();
+            const favs = getFavs();
+            document.getElementById('favCount').innerText = favs.length;
+            document.getElementById('exchangeCount').innerText = db.length > 0 ? 'باز' : 'قفل';
+        }
+
+        // Initial Load
+        window.onload = function() {
+            getDB(); // Initialize default demo data if empty
+            renderMarket();
+            updateBadges();
+        };
+    </script>
 </body>
 </html>
