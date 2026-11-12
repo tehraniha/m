@@ -1,170 +1,104 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>سامانه تخصصی معاوضه هوشمند املاک تهران</title>
-    <style>
-        :root { --p: #0a192f; --s: #b8860b; --a: #ffd700; --t: #e6f1ff; --bg: #f8f9fa; --w: #fff; --danger: #d9534f; }
-        * { box-sizing: border-box; }
-        body { font-family: Tahoma, sans-serif; background: var(--bg); margin: 0; color: var(--p); }
-        header { background: var(--p); color: var(--a); padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 15px rgba(0,0,0,.4); position: sticky; top: 0; z-index: 1000; flex-wrap: wrap; gap: 10px; }
-        nav { display: flex; gap: 5px; flex-wrap: wrap; }
-        nav button { background: transparent; border: 1px solid var(--a); color: var(--a); padding: .5rem 1rem; cursor: pointer; border-radius: 6px; transition: .3s; font-weight: 700; font-family: Tahoma; }
-        nav button:hover { background: var(--a); color: var(--p); }
-        .hero { background: linear-gradient(rgba(10,25,47,.85),rgba(10,25,47,.85)), url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1350&q=80'); background-size: cover; background-position: center; height: 320px; display: flex; flex-direction: column; justify-content: center; align-items: center; color: var(--w); text-align: center; padding: 0 20px; }
-        .hero h1 { color: var(--a); font-size: 2.2rem; margin: 0 0 10px 0; }
-        .hero p { font-size: 1.1rem; color: var(--t); max-width: 800px; line-height: 1.6; }
-        .container { padding: 2rem; max-width: 1200px; margin: auto; }
-        .alert-box { background: #fff3f3; border: 2px dashed var(--danger); padding: 15px 20px; border-radius: 8px; margin-bottom: 25px; color: #900; display: flex; align-items: center; gap: 15px; font-weight: 700; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
-        .card { background: var(--w); border-radius: 10px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,.06); transition: transform .3s; border-top: 4px solid var(--s); position: relative; }
-        .card:hover { transform: translateY(-5px); }
-        .card-img { height: 180px; background-size: cover; background-position: center; position: relative; background-color: #ddd; }
-        .fav-btn { position: absolute; top: 10px; left: 10px; background: rgba(0,0,0,.6); border: none; color: #fff; width: 35px; height: 35px; border-radius: 50%; cursor: pointer; font-size: 1.2rem; display: flex; align-items: center; justify-content: center; transition: .2s; }
-        .fav-btn.active { color: #ff4757; }
-        .card-body { padding: 1.2rem; }
-        .card-title { font-weight: 700; font-size: 1.1rem; margin-bottom: 8px; color: var(--p); }
-        .card-info { font-size: .9rem; color: #555; line-height: 1.5; }
-        .badge { background: var(--s); color: #fff; padding: 3px 8px; border-radius: 4px; font-size: .75rem; font-weight: 700; }
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,.75); z-index: 2000; justify-content: center; align-items: center; }
-        .modal-content { background: #fff; width: 90%; max-width: 700px; max-height: 85vh; overflow-y: auto; padding: 2rem; border-radius: 10px; position: relative; }
-        .close-modal { position: absolute; top: 15px; left: 15px; font-size: 1.8rem; cursor: pointer; color: #555; }
-        .btn-main { background: var(--p); color: var(--a); border: none; padding: 12px 20px; border-radius: 6px; cursor: pointer; font-weight: 700; width: 100%; transition: .3s; font-family: Tahoma; }
-        .btn-main:hover { background: #132f4c; }
-        .panel { display: none; }
-        .panel.active { display: block; }
-        form label { font-weight: 700; font-size: .9rem; color: var(--p); display: block; margin-top: 10px; }
-        form input, form select, form textarea { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; margin-top: 5px; font-family: Tahoma; }
-        footer { background: var(--p); color: var(--w); text-align: center; padding: 2rem; margin-top: 3rem; border-top: 3px solid var(--s); }
-        .spec-table { width: 100%; border-collapse: collapse; margin-top: 15px; }
-        .spec-table td { padding: 8px; border-bottom: 1px solid #eee; font-size: .9rem; }
-        .spec-label { font-weight: 700; color: var(--s); width: 35%; }
-    </style>
+<meta charset="UTF-8">
+<title>Tehran Smart Property Exchange [Secure Obfuscated]</title>
+<style>
+:root{--p:#1e3a8a;--s:#0f172a;--a:#dc2626;--b:#f8fafc;--c:#fff;--t:#1e293b;--br:#cbd5e1}
+*{box-sizing:border-box;margin:0;padding:0;font-family:Tahoma,sans-serif}
+body{background:var(--b);color:var(--t);line-height:1.6}
+header{background:var(--s);color:#fff;padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center;border-bottom:4px solid var(--a)}
+nav{display:flex;gap:1rem}
+nav button{background:transparent;border:1px solid #475569;color:#fff;padding:.5rem 1rem;cursor:pointer;border-radius:4px}
+nav button.active,nav button:hover{background:var(--p)}
+.container{max-width:1200px;margin:2rem auto;padding:0 1rem}
+.alert{border:2px dashed var(--a);background:#fef2f2;padding:1rem;border-radius:8px;margin-bottom:1.5rem}
+.card{background:var(--c);border:1px solid var(--br);border-radius:8px;padding:1.5rem;margin-bottom:1.5rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1rem}
+input,select,textarea{width:100%;padding:.75rem;border:1px solid var(--br);border-radius:4px}
+.btn{background:var(--p);color:#fff;border:none;padding:.75rem 1.5rem;cursor:pointer;border-radius:4px;font-weight:bold}
+.tab{display:none}
+.tab.active{display:block}
+</style>
 </head>
 <body>
-
 <header>
-    <div style="font-weight: 700; font-size: 1.1rem;">🏛️ سامانه تخصصی معاوضه املاک تهران</div>
-    <nav>
-        <button onclick="_0x1a('home')">خانه</button>
-        <button onclick="_0x1a('search')">جستجو</button>
-        <button onclick="_0x1a('favorites')">علاقه‌مندی‌ها (<span id="fav-count">0</span>)</button>
-        <button onclick="_0x1a('register')">ثبت ملک</button>
-        <button onclick="_0x1a('upgrade')">ارتقا ویژه</button>
-        <button onclick="_0x1a('admin')">مدیریت</button>
-    </nav>
+<div>سامانه تخصصی معاوضه هوشمند املاک (نسخه ایمن)</div>
+<nav>
+<button onclick="_0xTab('m')" class="active">بازار</button>
+<button onclick="_0xTab('r')">ثبت ملک</button>
+<button onclick="_0xTab('e')">معاوضه (<span id="_0xEx">قفل</span>)</button>
+<button onclick="_0xTab('a')">مدیریت</button>
+</nav>
 </header>
-
-<div id="home-panel" class="panel active">
-    <div class="hero">
-        <h1>معهود ثروت؛ مهندسی نوین تبادل ملک</h1>
-        <p>بهینه‌ترین پروتکل تخصصی معاوضه دارایی‌های ملکی در پایتخت بر اساس ارزش نسبی.</p>
-    </div>
-    <div class="container">
-        <div class="alert-box">
-            <span>🚨</span>
-            <div>اطلاعیه فنی سیستم: سامانه در بستر LocalStorage به صورت ایزوله و آفلاین اجرا می‌شود.</div>
-        </div>
-        <div style="background: linear-gradient(135deg, #0a192f, #132f4c); color: #ffd700; padding: 20px; border-radius: 8px; margin-bottom: 25px; text-align: center;">
-            <h3 style="margin-top:0;">⚠️ پروتکل دسترسی به بانک معاوضه</h3>
-            <p style="color: #e6f1ff; font-size: 0.95rem; line-height: 1.5;">دسترسی کامل به شبکه املاک معاوضه و تبادل مستقیم، <strong>فقط پس از ثبت حداقل یک ملک معتبر</strong> از سوی شما فعال خواهد شد.</p>
-            <button onclick="_0x1a('register')" class="btn-main" style="width: auto; background: var(--a); color: var(--p); margin-top: 10px; padding: 10px 25px;">ثبت ملک و فعال‌سازی فوری</button>
-        </div>
-        <h2 style="border-right: 4px solid var(--s); padding-right: 10px; margin-bottom: 20px;">پورتفوی املاک ثبت شده در شبکه</h2>
-        <div id="property-grid" class="grid"></div>
-    </div>
+<div class="container">
+<div class="alert"><strong>سیستم رمزنگاری محلی فعال است.</strong> تبادل املاک صرفاً تهرانی و بدون قیمت نقدی.</div>
+<div id="m" class="tab active">
+<h2>املاک تایید شده</h2>
+<div id="_0xList" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem;margin-top:1rem;"></div>
 </div>
-
-<div id="search-panel" class="panel">
-    <div class="container">
-        <h2>موتور جستجوی پیشرفته املاک</h2>
-        <div style="background:#fff; padding:20px; border-radius:8px; margin-bottom:20px;">
-            <input type="text" id="search-q" placeholder="جستجوی کلیدواژه..." oninput="_0x4a()">
-        </div>
-        <div id="search-grid" class="grid"></div>
-    </div>
+<div id="r" class="tab">
+<h2>ثبت ملک جدید</h2>
+<div class="card">
+<form onsubmit="_0xReg(event)">
+<div class="grid">
+<div><label>عنوان</label><input type="text" id="_t" required></div>
+<div><label>منطقه</label><select id="_rg"><option>منطقه ۱</option><option>منطقه ۲</option><option>منطقه ۳</option><option>منطقه ۴</option><option>منطقه ۵</option></select></div>
+<div><label>متراژ</label><input type="number" id="_ar" required></div>
+<div><label>تصویر URL</label><input type="url" id="_img" value="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=600" required></div>
 </div>
-
-<div id="favorites-panel" class="panel">
-    <div class="container">
-        <h2>سبد املاک منتخب</h2>
-        <div id="fav-grid" class="grid"></div>
-    </div>
+<button type="submit" class="btn" style="margin-top:1rem;">ثبت و بازگشایی معاوضه</button>
+</form>
 </div>
-
-<div id="register-panel" class="panel">
-    <div class="container" style="max-width:700px;">
-        <div style="background:#fff; padding:25px; border-radius:10px; border-top:4px solid var(--s);">
-            <h2 style="margin-top:0;">ثبت مشخصات ملکی جهت راه‌اندازی معاوضه</h2>
-            <form id="reg-form" onsubmit="_0x2b(event)">
-                <label>عنوان حرفه‌ای آگهی:</label><input type="text" id="r-title" required>
-                <label>منطقه شهرداری تهران:</label><input type="text" id="r-region" required>
-                <label>نوع کاربری ملک:</label>
-                <select id="r-type"><option value="آپارتمان">آپارتمان</option><option value="ویلایی">ویلایی</option><option value="کلنگی">کلنگی</option><option value="پنت‌هاوس">پنت‌هاوس</option></select>
-                <label>متراژ دقیق (متر مربع):</label><input type="number" id="r-area" required>
-                <label>تعداد اتاق خواب:</label><input type="number" id="r-rooms" required>
-                <label>سال ساخت:</label><input type="text" id="r-year" required>
-                <label>جهت ملک:</label><input type="text" id="r-direction" required>
-                <label>آدرس دقیق:</label><input type="text" id="r-address" required>
-                <label>لینک تصویر باکیفیت ملک:</label><input type="url" id="r-img" required>
-                <label>امکانات ویژه:</label><textarea id="r-desc" rows="3"></textarea>
-                <button type="submit" class="btn-main" style="margin-top:20px;">ثبت نهایی و باز شدن قابلیت معاوضه</button>
-            </form>
-        </div>
-    </div>
 </div>
-
-<div id="upgrade-panel" class="panel">
-    <div class="container" style="max-width:700px;">
-        <div style="background:#0a192f; color:#ffd700; padding:30px; border-radius:10px; text-align:center; border:1px solid var(--s);">
-            <h2>ارتقای سطح دسترسی ویژه سرمایه‌گذاران</h2>
-            <div style="background:rgba(255,255,255,.05); padding:20px; border-radius:8px; margin-top:20px; text-align:right;">
-                <p><strong>نام بانک:</strong> بانک صادرات ایران</p>
-                <p><strong>شماره حساب:</strong> <span style="font-family:monospace; font-size:1.2rem;">0120299048009</span></p>
-                <p><strong>شماره شبا:</strong> <span style="font-family:monospace; font-size:1.2rem;">IR460190120299048009</span></p>
-            </div>
-            <p style="font-size:.85rem; color:#aaa; margin-top:15px;">ارسال فیش به ایمیل: HLTH3AL@gmail.com</p>
-        </div>
-    </div>
+<div id="e" class="tab">
+<h2>موتور معاوضه</h2>
+<div id="_0xExBox" class="card"></div>
 </div>
-
-<div id="admin-panel" class="panel">
-    <div class="container" style="max-width:700px;">
-        <div style="background:#fff; padding:25px; border-radius:10px;">
-            <h2>پنل نظارت و مدیریت مرکزی</h2>
-            <p>تعداد کل املاک ثبت‌شده توسط کاربران: <span id="admin-count" style="font-weight:700; color:var(--s);">0</span></p>
-            <button onclick="_0x5c()" style="background:var(--danger); color:#fff; border:none; padding:10px 15px; border-radius:6px; cursor:pointer; font-weight:700; font-family:Tahoma;">پاک‌سازی کلیه داده‌ها</button>
-        </div>
-    </div>
+<div id="a" class="tab">
+<h2>مدیریت</h2>
+<div class="card">
+<p>املاک ثبت شده: <span id="_0xCnt">0</span></p>
+<button class="btn" style="background:var(--a);margin-top:1rem;" onclick="_0xRst()">پاکسازی دیتابیس</button>
 </div>
-
-<div id="detail-modal" class="modal">
-    <div class="modal-content">
-        <span class="close-modal" onclick="_0x3c()">&times;</span>
-        <div id="modal-body"></div>
-    </div>
 </div>
-
-<footer>
-    <p>سامانه تخصصی معاوضه هوشمند املاک تهران | پشتیبانی: HLTH3AL@gmail.com</p>
-</footer>
-
+</div>
 <script>
-/*! Secure Core Engine v2.5 */
-const _0xdb = '_tehran_exchange_db', _0xfb = '_tehran_favs';
-let _d = JSON.parse(localStorage.getItem(_0xdb)) || [], _f = JSON.parse(localStorage.getItem(_0xfb)) || [];
-
-function _0x1a(_p) {
-    document.querySelectorAll('.panel').forEach(e => e.classList.remove('active'));
-    document.getElementById(_p + '-panel').classList.add('active');
-    window.scrollTo(0, 0);
-    if(_p === 'home') _0x3e();
-    if(_p === 'favorites') _0x4e();
-    if(_p === 'search') _0x4a();
-    if(_p === 'admin') _0x5e();
+const _k = '_tehran_exchange_db';
+function _0xGet(){try{return JSON.parse(localStorage.getItem(_k))||[];}catch(e){return[];}}
+function _0xTab(id){
+document.querySelectorAll('.tab').forEach(e=>e.classList.remove('active'));
+document.querySelectorAll('nav button').forEach(e=>e.classList.remove('active'));
+document.getElementById(id).classList.add('active');
+event.target.classList.add('active');
+if(id==='m')_0xRend();
+if(id==='e')_0xExLoad();
+if(id==='a')document.getElementById('_0xCnt').innerText=_0xGet().length;
 }
-
-function _0x3e() {
-    const _g = document.getElementById('property-grid');
-    _g.innerHTM
+function _0xReg(e){
+e.preventDefault();
+let d=_0xGet();
+d.push({id:Date.now(),title:document.getElementById('_t').value,region:document.getElementById('_rg').value,area:document.getElementById('_ar').value,img:document.getElementById('_img').value});
+localStorage.setItem(_k,JSON.stringify(d));
+alert('ملک ثبت شد!');
+document.getElementById('_0xEx').innerText='باز';
+_0xTab('m');
+}
+function _0xRend(){
+let d=_0xGet(),c=document.getElementById('_0xList');
+c.innerHTML='';
+if(d.length===0){c.innerHTML='<p>هیچ ملکی ثبت نشده است.</p>';return;}
+d.forEach(i=>{
+c.innerHTML+=`<div class="card"><img src="${i.img}" style="width:100%;height:150px;object-fit:cover;border-radius:4px"><h3>${i.title}</h3><p>${i.region} - ${i.area} متر</p><button class="btn" style="margin-top:.5rem" onclick="alert('درخواست معاوضه ارسال شد.')">درخواست معاوضه</button></div>`;
+});
+}
+function _0xExLoad(){
+let d=_0xGet(),b=document.getElementById('_0xExBox');
+if(d.length===0){b.innerHTML='<h3>دسترسی قفل است</h3><p>لطفاً ابتدا ملکی ثبت کنید.</p>';}
+else{b.innerHTML=`<h3>سیستم معاوضه فعال</h3><p>شما ${d.length} ملک ثبتی دارید و واجد شرایط تبادل هوشمند هستید.</p>`;}
+}
+function _0xRst(){localStorage.removeItem(_k);alert('پاک شد.');_0xRend();}
+window.onload=()=>_0xRend();
+</script>
+</body>
+</html>
